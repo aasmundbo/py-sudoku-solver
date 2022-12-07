@@ -46,7 +46,24 @@ num_iterations = 0
 
 
 def next_unsolved(puzzle: list, row: int = 0, col: int = 0) -> tuple:
-    """Returns (row,col) tuple of next empty cell."""
+    """
+    Returns (row,col) tuple of next empty cell, or (10,10) if no empty cell was found.
+
+    Parameters
+    ----------
+    puzzle : list
+        The puzzle
+    row : int, optional
+        Start row, by default 0
+    col : int, optional
+        Start column, by default 0
+
+    Returns
+    -------
+    tuple
+        (row,column) coordinate of the next empty cell
+    """
+
     for curr_row, row_list in enumerate(puzzle[row:]):
         for curr_col, value in enumerate(row_list[col:]):
             if value == 0:
@@ -58,7 +75,23 @@ def next_unsolved(puzzle: list, row: int = 0, col: int = 0) -> tuple:
 
 def valid_puzzle(puzzle: list, row: int, col: int, number: int) -> bool:
     """
-    Check if number in location (row,col) is valid.
+    Check if board is valid if number is placed in location (row,col).
+
+    Parameters
+    ----------
+    puzzle : list
+        The puzzle
+    row : int
+        Row placement
+    col : int
+        Column placement
+    number : int
+        The number to place in (row,col)
+
+    Returns
+    -------
+    bool
+        Returns True if puzzle is valid, False otherwise.
     """
     # Valid for row
     if number in puzzle[row]:
@@ -81,7 +114,17 @@ def valid_puzzle(puzzle: list, row: int, col: int, number: int) -> bool:
 
 def solve(puzzle: list) -> bool:
     """
-    Solves Sudoku. Returns true if solution is found, false otherwise
+    Recursively solve Sudoku.
+
+    Parameters
+    ----------
+    puzzle : list
+        The puzzle to solve
+
+    Returns
+    -------
+    bool
+        Returns true if a valid solution is found, false otherwise.
     """
     global num_iterations
     num_iterations += 1
